@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_myapp/form.dart';
+import 'package:flutter_application_myapp/page/form.dart';
+import 'package:flutter_application_myapp/model/to_do.dart';
+import 'package:flutter_application_myapp/page/to_do_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,7 +9,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -75,34 +77,44 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
+      // Menambahkan drawer menu
       drawer: Drawer(
-        child: Column(
-          children: [
-            // Menambahkan clickable menu
-            ListTile(
-              title: const Text('Counter'),
-              onTap: () {
-                // Route menu ke halaman utama
+          child: Column(
+            children: [
+              // Menambahkan clickable menu
+              ListTile(
+                title: const Text('Counter'),
+                onTap: () {
+                  // Route menu ke halaman utama
+                  Navigator.pop(
+                    context,
+                  );
+                },
+              ),
+              ListTile(
+                title: const Text('Form'),
+                onTap: () {
+                  // Route menu ke halaman form
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyFormPage()),
+                  );
+                },
+              ),
+              ListTile(
+                title: const Text('To Do'),
+                onTap: () {
+                // Route menu ke halaman to do
                 Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyHomePage()),
+                context,
+                MaterialPageRoute(builder: (context) => const ToDoPage()),
                 );
-              },
-            ),
-            ListTile(
-              title: const Text('Form'),
-              onTap: () {
-                // Route menu ke halaman form
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyFormPage()),
-                );
-              },
-            ),
-          ],
+            },
+          ),
+            ],
+          ),
         ),
-      ),
-      body: Form(
+      body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
